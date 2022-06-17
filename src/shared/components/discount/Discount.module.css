@@ -1,0 +1,37 @@
+.discount__container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #ececf3;
+  border-radius: 72px;
+  margin: 0 168px;
+}
+
+.discount__container__input {
+  background-color: transparent;
+  margin: 30px 0 30px 20px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 28px;
+  border: 0;
+  outline: 0;
+}
+
+.discount__container__button {
+  background-color: transparent;
+  padding: 21px 63px;
+  margin: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+  border: 1px solid #dbdbdb;
+  border-radius: 36px;
+}
+
+.discount__container__button.active {
+  background-color: #fafafa;
+}
+
+.discount__container__button.active:hover {
+  background-color: #f4f4f4;
+  transition: 0.3s;
+}
