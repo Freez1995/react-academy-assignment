@@ -1,5 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import styles from './SizeSelector.styles';
 import React, { useState } from 'react';
-import styles from './SizeSelector.module.css';
 import { PizzaSizeComponentProps } from 'modules/configurator/models';
 
 export const SizeSelector: React.FC<PizzaSizeComponentProps> = ({
@@ -14,16 +15,12 @@ export const SizeSelector: React.FC<PizzaSizeComponentProps> = ({
   }
 
   return (
-    <div className={styles.selector__container}>
+    <div css={styles.selector__container}>
       {sizes.map((sizes) => {
         return (
           <button
             key={sizes.id}
-            className={
-              styles['selector__container__button'] +
-              ' ' +
-              (selected === sizes.id ? styles.active : '')
-            }
+            css={styles.selector__container__button({ selected, sizes })}
             onClick={() => handleOnClick(sizes.id, sizes.price)}
           >
             {sizes.size}

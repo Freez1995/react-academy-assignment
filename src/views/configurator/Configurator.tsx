@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import styles from './Configurator.styles';
 import React, { useEffect, useState } from 'react';
 import { Discount, Header } from 'shared';
 import { Footer, SizeSelector, Topping } from 'modules/configurator';
@@ -11,49 +13,48 @@ import {
   shroomsIcon,
   deleteIcon,
 } from './assets';
-import './Configurator.css';
 
 export const Configurator: React.FC = () => {
   const toppingData = [
     {
       id: 1,
-      name: 'chilli',
+      name: 'Chilli',
       img: chilliIcon,
       price: 1,
     },
     {
       id: 2,
-      name: 'corn',
+      name: 'Corn',
       img: cornIcon,
       price: 1,
     },
     {
       id: 3,
-      name: 'egg',
+      name: 'Egg',
       img: eggIcon,
       price: 1.5,
     },
     {
       id: 4,
-      name: 'pineapple',
+      name: 'Pineapple',
       img: pineappleIcon,
       price: 1.5,
     },
     {
       id: 5,
-      name: 'meat',
+      name: 'Meat',
       img: meatIcon,
       price: 2,
     },
     {
       id: 6,
-      name: 'shrooms',
+      name: 'Shrooms',
       img: shroomsIcon,
       price: 1.5,
     },
     {
       id: 7,
-      name: 'bacon',
+      name: 'Bacon',
       img: baconIcon,
       price: 2.5,
     },
@@ -123,26 +124,22 @@ export const Configurator: React.FC = () => {
   }, [discountValue, toppingSum, sizePrice]);
 
   return (
-    <div className="wrapper">
+    <div css={styles.wrapper}>
       <Header />
       <h1>Toppings! Toppings!</h1>
       <Topping topping={toppingData} onChange={toppingsSum} />
-      <p className="total__price">Total price +${toppingSum}</p>
+      <p css={styles.total__price}>Total price +${toppingSum}</p>
       <h1>Pizza! Pizza! size</h1>
       <SizeSelector sizes={pizzaSizeData} onChange={sizeSum} />
       <h1>Get the discount</h1>
       <Discount discounts={discountData} onChange={discountSum} />
-      <div className="discount__container">
-        <p className={'discount' + ' ' + (isValidDiscount ? 'valid' : 'error')}>
-          {infoMessage}
-        </p>
+      <div css={styles.discount__container(isValidDiscount)}>
+        <p>{infoMessage}</p>
         <img
-          className="discount__img"
           src={infoMessage === '' ? '' : deleteIcon}
           onClick={handleImgClick}
         />
       </div>
-
       <Footer currentPrice={currentPrice} />
     </div>
   );

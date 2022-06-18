@@ -1,7 +1,8 @@
+/** @jsxImportSource @emotion/react */
+import styles from './Footer.styles';
 import { FooterComponentProps } from 'modules/configurator/models';
 import React, { useEffect, useState } from 'react';
 import footerIcon from './assets/footer-pizza-icon.svg';
-import styles from './Footer.module.css';
 
 export const Footer: React.FC<FooterComponentProps> = ({ currentPrice }) => {
   const [quantitySelector, setQuantitySelector] = useState<number | string>(1);
@@ -14,6 +15,10 @@ export const Footer: React.FC<FooterComponentProps> = ({ currentPrice }) => {
     }
     if (quantityValue > 20) {
       setQuantitySelector(20);
+      return;
+    }
+    if (quantityValue < 0) {
+      setQuantitySelector(1);
       return;
     }
     setQuantitySelector(quantityValue);
@@ -29,10 +34,10 @@ export const Footer: React.FC<FooterComponentProps> = ({ currentPrice }) => {
   }, [quantitySelector, currentPrice]);
 
   return (
-    <footer className={styles.footer__container}>
-      <img className={styles['foorter__container--img']} src={footerIcon} />
-      <div className={styles['footer__container--details']}>
-        <div className={styles['footer__container--qty']}>
+    <footer css={styles.footer__container}>
+      <img css={styles.footer__container__img} src={footerIcon} />
+      <div css={styles.footer__container__details}>
+        <div css={styles.footer__container__qty}>
           <input
             type="number"
             value={quantitySelector}
@@ -40,13 +45,13 @@ export const Footer: React.FC<FooterComponentProps> = ({ currentPrice }) => {
           ></input>
           <p>QTY</p>
         </div>
-        <div className={styles['footer__container--order']}>
+        <div css={styles.footer__container__order}>
           <p>${currentPrice < finalPrice ? finalPrice : currentPrice}</p>
           <p>ORDER TOTAL</p>
         </div>
       </div>
       <button
-        className={styles['footer__container--button']}
+        css={styles.footer__container__button}
         disabled={
           quantitySelector === '' || quantitySelector === 0 ? true : false
         }

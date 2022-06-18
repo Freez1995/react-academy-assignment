@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
 import { DiscountComponentProps } from 'shared/models';
-import styles from './Discount.module.css';
+import styles from './Discount.styles';
 
 export const Discount: React.FC<DiscountComponentProps> = ({
   discounts,
@@ -8,7 +9,8 @@ export const Discount: React.FC<DiscountComponentProps> = ({
 }) => {
   const [discountInput, setDiscountInput] = useState<string>('');
 
-  function handleOnClick() {
+  function handleOnClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
     for (const discount of discounts) {
       if (discount.discountId === discountInput) {
         return onChange(
@@ -23,26 +25,20 @@ export const Discount: React.FC<DiscountComponentProps> = ({
   }
 
   return (
-    <div className={styles.discount__container}>
+    <form css={styles.discount__container}>
       <input
         type="text"
-        className={styles.discount__container__input}
         placeholder="Enter discount code"
         onChange={(e) => setDiscountInput(e.target.value)}
       ></input>
       <button
-        className={
-          styles.discount__container__button +
-          ' ' +
-          (discountInput !== '' ? styles.active : '')
-        }
-        onClick={() => {
-          handleOnClick();
+        onClick={(e) => {
+          handleOnClick(e);
         }}
         disabled={discountInput === ''}
       >
         Apply
       </button>
-    </div>
+    </form>
   );
 };
