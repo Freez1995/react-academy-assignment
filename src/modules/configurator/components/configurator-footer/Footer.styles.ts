@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-const footer__container = css`
+const footerContainer = css`
   display: flex;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid #f2f2f2;
@@ -23,20 +23,35 @@ const footer__container = css`
   input[type='number'] {
     -moz-appearance: textfield;
   }
+  img {
+    margin-left: 36px;
+    align-self: flex-end;
+  }
+  button {
+    font-size: 16px;
+    padding: 22px 37px;
+    margin-right: 60px;
+    background-color: #b95de4;
+    border-radius: 48px;
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    &:disabled {
+      background-color: #ececf3;
+    }
+    &:active {
+      background-color: #e5c3f5;
+    }
+  }
 `;
 
-const footer__container__img = css`
-  margin-left: 36px;
-  align-self: flex-end;
-`;
-
-const footer__container__details = css`
+const detailsContainer = css`
   display: flex;
   align-items: center;
   margin: 52px 0 40px 0;
 `;
 
-const footer__container__qty = css`
+const qtyContainer = css`
   padding: 0 28px;
   border-right: 1px dashed #dbdbdb;
   input {
@@ -55,7 +70,7 @@ const footer__container__qty = css`
   }
 `;
 
-const footer__container__order = css`
+const orderContainer = css`
   padding: 0 28px;
   p:first-of-type {
     color: #b95de4;
@@ -63,37 +78,16 @@ const footer__container__order = css`
     margin: 0;
     font-weight: bold;
   }
-  p:last-child {
+  p:last-of-type {
     margin-top: 0;
     font-size: 12px;
     color: #b9b9b9;
   }
 `;
 
-const footer__container__button = css`
-  font-size: 16px;
-  padding: 22px 37px;
-  margin-right: 60px;
-  background-color: #b95de4;
-  border-radius: 48px;
-  border: 0;
-  color: #ffffff;
-  cursor: pointer;
-  &:disabled {
-    background-color: #ececf3;
-  }
-  &:active {
-    background-color: #e5c3f5;
-  }
-`;
-
-const styles = {
-  footer__container,
-  footer__container__img,
-  footer__container__details,
-  footer__container__qty,
-  footer__container__order,
-  footer__container__button,
+export const styles = {
+  footerContainer,
+  detailsContainer,
+  qtyContainer,
+  orderContainer,
 };
-
-export default styles;

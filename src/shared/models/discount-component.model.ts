@@ -1,6 +1,7 @@
+import { DiscountState } from 'views';
 import { DiscountData } from './discount-db.model';
 
 export interface DiscountComponentProps {
   discounts: DiscountData[];
-  onChange(sum: number, isValid: boolean, message: string): void;
+  onDiscountApply({ value, isValid, message }: DiscountState): void;
 }

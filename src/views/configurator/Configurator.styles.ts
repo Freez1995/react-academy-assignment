@@ -15,11 +15,11 @@ const wrapper = css`
   }
 `;
 
-const total__price = css`
+const totalPrice = css`
   margin-top: 24px;
 `;
 
-const discount__container = (isValidDiscount: boolean) => css`
+const discountContainer = (isValidDiscount: boolean) => css`
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
@@ -31,10 +31,8 @@ const discount__container = (isValidDiscount: boolean) => css`
   }
 `;
 
-const styles = {
+export const styles = {
   wrapper,
-  total__price,
-  discount__container,
+  totalPrice,
+  discountContainer,
 };
-
-export default styles;

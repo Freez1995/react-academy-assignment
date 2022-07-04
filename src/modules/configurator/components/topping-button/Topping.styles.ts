@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ToppingData } from 'modules/configurator/models/topping-db.model';
+// import { ToppingData } from 'modules/configurator/models/topping-db.model';
 
 const container = css`
   display: flex;
@@ -7,13 +7,7 @@ const container = css`
   justify-content: space-between;
 `;
 
-const topping__btn = ({
-  selected,
-  topping,
-}: {
-  selected: Array<number>;
-  topping: ToppingData;
-}) => css`
+const toppingBtn = css`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,16 +24,13 @@ const topping__btn = ({
     border: 1px solid lightgray;
     background-color: #f4f4f4;
   }
-  ${selected.includes(topping.id) ? `background-color: #e5c3f5 !important` : ''}
 `;
 
-const topping__btn__img__background = ({
-  selected,
-  topping,
-}: {
-  selected: Array<number>;
-  topping: ToppingData;
-}) => css`
+const toppingBtnActive = css`
+  background-color: #e5c3f5 !important;
+`;
+
+const toppingImgContainer = css`
   display: flex;
   justify-content: center;
   background-color: #ffffff;
@@ -48,13 +39,16 @@ const topping__btn__img__background = ({
   padding: 22px 26px 18px;
   margin: 11px 11px 8px 11px;
   transition: 0.4s;
-  ${selected.includes(topping.id) ? `background-color: #edd5f8` : ''}
 `;
 
-const styles = {
-  container,
-  topping__btn,
-  topping__btn__img__background,
-};
+const toppingImgContainerActive = css`
+  background-color: #edd5f8;
+`;
 
-export default styles;
+export const styles = {
+  container,
+  toppingBtn,
+  toppingBtnActive,
+  toppingImgContainer,
+  toppingImgContainerActive,
+};

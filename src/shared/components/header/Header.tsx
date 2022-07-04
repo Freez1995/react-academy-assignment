@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
+import { headerPizzaIcon } from 'assets';
 import React from 'react';
-import pizzaIcon from './assets/navigation-pizza-icon.svg';
-import styles from './Header.styles';
+import { styles } from './Header.styles';
 
 export const Header: React.FC = () => {
   return (
-    <div css={styles.header__container}>
+    <div css={styles.headerContainer}>
       <p>Pizz-á-tron</p>
-      <img src={pizzaIcon} />
+      <img src={headerPizzaIcon} />
       <button>Log out</button>
     </div>
   );

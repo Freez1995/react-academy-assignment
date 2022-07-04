@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import styles from './Configurator.styles';
+import { styles } from './Configurator.styles';
 import React, { useEffect, useState } from 'react';
 import { Discount, Header } from 'shared';
-import { Footer, SizeSelector, Topping } from 'modules/configurator';
+import { Footer, SizeSelector, Topping } from 'modules';
 import {
   baconIcon,
   chilliIcon,
@@ -12,7 +12,13 @@ import {
   pineappleIcon,
   shroomsIcon,
   deleteIcon,
-} from './assets';
+} from 'assets';
+
+export interface DiscountState {
+  value: number;
+  isValid: boolean;
+  message: string;
+}
 
 export const Configurator: React.FC = () => {
   const toppingData = [
@@ -87,57 +93,55 @@ export const Configurator: React.FC = () => {
     },
   ];
 
+  const discountDefaultState: DiscountState = {
+    value: 0,
+    isValid: false,
+    message: '',
+  };
+
   const [toppingSum, setToppingSum] = useState<number>(0);
-  const [sizePrice, setSizePrice] = useState<number>(10);
-  const [discountValue, setDiscountValue] = useState<number>(0);
-  const [isValidDiscount, setIsValidDiscount] = useState<boolean>(false);
-  const [infoMessage, setInfoMessage] = useState<string>('');
+  const [sizePrice, setSizePrice] = useState<number>(0);
+  const [discount, setDiscount] = useState<DiscountState>(discountDefaultState);
   const [currentPrice, setCurrentPrice] = useState<number>(0);
 
-  function toppingsSum(sum: number) {
+  function toppingsPrice(sum: number) {
     setToppingSum(toppingSum + sum);
   }
 
-  function sizeSum(sum: number) {
+  function pizzaSizePrice(sum: number) {
     setSizePrice(sum);
   }
 
-  function discountSum(sum: number, isValid: boolean, message: string) {
-    setDiscountValue(sum);
-    setIsValidDiscount(isValid);
-    setInfoMessage(message);
+  function discountApply({ value, isValid, message }: DiscountState) {
+    setDiscount({ value: value, isValid: isValid, message: message });
   }
 
-  function handleImgClick() {
-    if (isValidDiscount) {
-      setInfoMessage('');
-      setDiscountValue(0);
-      return;
-    }
-    setInfoMessage('');
+  function handleRemoveDiscount() {
+    setDiscount(discountDefaultState);
   }
 
   useEffect(() => {
     const pizzaCost = sizePrice + toppingSum;
-    const discountTotal = pizzaCost * discountValue;
-    setCurrentPrice(pizzaCost - discountTotal);
-  }, [discountValue, toppingSum, sizePrice]);
+    discount.value !== 0
+      ? setCurrentPrice(pizzaCost - pizzaCost * discount.value)
+      : setCurrentPrice(pizzaCost);
+  }, [discount.value, toppingSum, sizePrice]);
 
   return (
     <div css={styles.wrapper}>
       <Header />
       <h1>Toppings! Toppings!</h1>
-      <Topping topping={toppingData} onChange={toppingsSum} />
-      <p css={styles.total__price}>Total price +${toppingSum}</p>
+      <Topping topping={toppingData} onToppingSelect={toppingsPrice} />
+      <p css={styles.totalPrice}>Total price +${toppingSum}</p>
       <h1>Pizza! Pizza! size</h1>
-      <SizeSelector sizes={pizzaSizeData} onChange={sizeSum} />
+      <SizeSelector sizes={pizzaSizeData} onPizzaSizeSelect={pizzaSizePrice} />
       <h1>Get the discount</h1>
-      <Discount discounts={discountData} onChange={discountSum} />
-      <div css={styles.discount__container(isValidDiscount)}>
-        <p>{infoMessage}</p>
+      <Discount discounts={discountData} onDiscountApply={discountApply} />
+      <div css={styles.discountContainer(discount.isValid)}>
+        <p>{discount.message}</p>
         <img
-          src={infoMessage === '' ? '' : deleteIcon}
-          onClick={handleImgClick}
+          src={discount.message !== '' ? deleteIcon : ''}
+          onClick={handleRemoveDiscount}
         />
       </div>
       <Footer currentPrice={currentPrice} />

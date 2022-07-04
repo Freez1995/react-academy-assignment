@@ -6,6 +6,7 @@ import meatIcon from './meat.svg';
 import pineappleIcon from './pineapple.svg';
 import shroomsIcon from './shrooms.svg';
 import deleteIcon from './delete.svg';
+import footerPizzaIcon from './footer-pizza-icon.svg';
 
 export {
   baconIcon,
@@ -16,4 +17,5 @@ export {
   pineappleIcon,
   shroomsIcon,
   deleteIcon,
+  footerPizzaIcon,
 };

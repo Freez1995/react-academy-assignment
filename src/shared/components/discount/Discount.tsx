@@ -1,31 +1,33 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
 import { DiscountComponentProps } from 'shared/models';
-import styles from './Discount.styles';
+import { styles } from './Discount.styles';
 
 export const Discount: React.FC<DiscountComponentProps> = ({
   discounts,
-  onChange,
+  onDiscountApply,
 }) => {
   const [discountInput, setDiscountInput] = useState<string>('');
 
-  function handleOnClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleValidityOfDiscount(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    for (const discount of discounts) {
-      if (discount.discountId === discountInput) {
-        return onChange(
-          discount.discountValue,
-          true,
-          `+${discount.discountValue * 100}% discount applied.`,
-        );
-      } else {
-        onChange(0, false, 'Invalid discount code.');
-      }
+    onDiscountApply({
+      value: 0,
+      isValid: false,
+      message: 'Invalid discount code.',
+    });
+    for (let i = 0; i < discounts.length; i++) {
+      discounts[i].discountId === discountInput &&
+        onDiscountApply({
+          value: discounts[i].discountValue,
+          isValid: true,
+          message: `+${discounts[i].discountValue * 100}% discount applied.`,
+        });
     }
   }
 
   return (
-    <form css={styles.discount__container}>
+    <form css={styles.discountContainer}>
       <input
         type="text"
         placeholder="Enter discount code"
@@ -33,7 +35,7 @@ export const Discount: React.FC<DiscountComponentProps> = ({
       ></input>
       <button
         onClick={(e) => {
-          handleOnClick(e);
+          handleValidityOfDiscount(e);
         }}
         disabled={discountInput === ''}
       >

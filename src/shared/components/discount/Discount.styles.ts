@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-const discount__container = css`
+const discountContainer = css`
   display: flex;
   flex-wrap: wrap;
   background-color: #ececf3;
@@ -41,8 +41,6 @@ const discount__container = css`
   }
 `;
 
-const styles = {
-  discount__container,
+export const styles = {
+  discountContainer,
 };
-
-export default styles;

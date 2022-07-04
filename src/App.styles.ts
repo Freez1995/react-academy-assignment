@@ -14,8 +14,6 @@ const global = css`
   }
 `;
 
-const styles = {
+export const styles = {
   global,
 };
-
-export default styles;

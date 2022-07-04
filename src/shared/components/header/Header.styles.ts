@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-const header__container = css`
+const headerContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,6 +17,4 @@ const header__container = css`
   }
 `;
 
-const styles = { header__container };
-
-export default styles;
+export const styles = { headerContainer };
